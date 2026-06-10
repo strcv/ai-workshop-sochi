@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI-диагностика бизнеса · Воркшоп в Сочи</title>
+<meta name="description" content="Пилотный воркшоп в Сочи для собственников: за 4+ часа соберём карту бизнеса и план внедрения AI. 10 мест, 15 000 ₽." />
+
+<!-- Вариант с приёмом заявок через встроенную Notion-форму (iframe). -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root{
+    --bg:#0a0b0c; --bg-2:#0e0f11; --card:#141518; --card-2:#17181c;
+    --border:rgba(255,255,255,.08); --border-2:rgba(255,255,255,.14);
+    --text:#f3f3f4; --muted:#8b8d91; --muted-2:#65686d;
+    --accent:#ffd60a; --live:#5ad07f; --radius:14px; --maxw:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  section{padding:84px 0;border-top:1px solid var(--border)}
+  .label{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);margin-bottom:22px;font-weight:500}
+  h1,h2,h3{font-weight:600;letter-spacing:-.02em;line-height:1.1}
+  h1{font-size:clamp(34px,6vw,60px)}
+  h2{font-size:clamp(26px,4vw,40px)}
+  h3{font-size:20px}
+  p.lead{color:var(--muted);font-size:clamp(16px,2.2vw,19px);line-height:1.6}
+  .ph{color:var(--accent);border-bottom:1px dashed rgba(255,214,10,.5);padding-bottom:1px;font-style:normal;white-space:nowrap}
+
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(10,11,12,.82);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-weight:600;letter-spacing:-.01em;font-size:15px}
+  .brand span{color:var(--muted-2);font-weight:400}
+  .nav-right{display:flex;align-items:center;gap:20px}
+  .live{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--live);box-shadow:0 0 0 0 rgba(90,208,127,.6);animation:pulse 2.2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(90,208,127,.5)}70%{box-shadow:0 0 0 7px rgba(90,208,127,0)}100%{box-shadow:0 0 0 0 rgba(90,208,127,0)}}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:600;font-size:14px;cursor:pointer;border:none;padding:11px 20px;border-radius:10px;transition:.18s;white-space:nowrap}
+  .btn-primary{background:var(--text);color:#0a0b0c}
+  .btn-primary:hover{background:#fff;transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border-2)}
+  .btn-ghost:hover{border-color:var(--text)}
+  .btn-lg{padding:15px 28px;font-size:15px;border-radius:11px}
+
+  .hero{padding-top:72px;padding-bottom:80px;border-top:none}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center}
+  .hero h1{margin-bottom:22px}
+  .hero h1 em{color:var(--accent);font-style:normal}
+  .hero .lead{margin-bottom:24px;max-width:560px}
+  .hero-bul{display:grid;gap:10px;margin-bottom:32px;max-width:540px}
+  .hero-bul .r{display:flex;gap:12px;align-items:flex-start;color:var(--muted);font-size:15px}
+  .hero-bul .r b{color:var(--text);font-weight:600}
+  .hero-bul .mark{color:var(--accent);flex:0 0 auto;margin-top:2px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:30px}
+  .meta-row{display:flex;gap:14px;flex-wrap:wrap}
+  .meta{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;min-width:140px}
+  .meta .k{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted-2);margin-bottom:5px}
+  .meta .v{font-size:15px;font-weight:600}
+  .photo-img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:var(--radius)}
+
+  .grid{display:grid;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+  .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+  .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+  .cell{background:var(--card);padding:28px}
+  .cell h3{margin-bottom:10px;font-size:18px}
+  .cell p{color:var(--muted);font-size:15px}
+  .cell .num{font-size:12px;color:var(--muted-2);margin-bottom:14px;font-weight:600;letter-spacing:.05em}
+
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .chip{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--border);border-radius:999px;padding:10px 14px;color:var(--text);font-weight:600;font-size:13px}
+  .chip .ic{width:22px;height:22px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;background:var(--bg);border:1px solid var(--border);color:var(--muted)}
+
+  .req{display:grid;gap:10px;margin-top:14px}
+  .req .r{display:flex;gap:12px;align-items:flex-start;color:var(--muted);font-size:15px;line-height:1.5}
+  .req .r b{color:var(--text);font-weight:600}
+  .req .r .mark{color:var(--accent);flex:0 0 auto;margin-top:2px}
+
+  .sec-head{max-width:680px;margin-bottom:44px}
+  .sec-head h2{margin-bottom:16px}
+  .sec-head p{color:var(--muted);font-size:17px}
+
+  /* price callout */
+  .pricebox{background:var(--card);border:1px solid var(--border-2);border-radius:var(--radius);padding:24px 26px;display:flex;gap:20px;align-items:flex-start;margin-top:8px}
+  .pricebox .tag{flex:0 0 auto;background:var(--accent);color:#0a0b0c;font-weight:700;font-size:12px;padding:7px 13px;border-radius:999px;letter-spacing:.02em}
+  .pricebox p{color:var(--muted);font-size:15px;line-height:1.6}
+  .pricebox b{color:var(--text)}
+
+  /* cases */
+  .cases{display:grid;gap:18px}
+  .case{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:28px;display:grid;gap:18px}
+  .case-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  .case-head h3{font-size:19px;margin-bottom:6px}
+  .case-head .ctx{color:var(--muted);font-size:14px;max-width:560px}
+  .case .badge{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2);border:1px solid var(--border-2);border-radius:999px;padding:6px 12px;white-space:nowrap}
+  .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+  .metric{background:var(--bg-2);padding:18px}
+  .metric .mv{font-size:24px;font-weight:700;color:var(--accent);letter-spacing:-.02em}
+  .metric .mk{font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.45}
+  .case-note{color:var(--muted-2);font-size:12px;margin-top:6px}
+
+  .nolist{display:grid;gap:14px;margin-top:8px}
+  .noitem{display:flex;gap:14px;align-items:flex-start;color:var(--muted);font-size:16px}
+  .noitem .x{color:var(--muted-2);flex:0 0 auto;margin-top:2px}
+
+  .agenda{border-top:1px solid var(--border)}
+  .arow{display:grid;grid-template-columns:64px 1fr;gap:24px;padding:24px 0;border-bottom:1px solid var(--border);align-items:start}
+  .arow .anum{color:var(--muted-2);font-weight:600;font-size:15px;padding-top:2px}
+  .arow h3{font-size:18px;margin-bottom:6px}
+  .arow p{color:var(--muted);font-size:15px}
+
+  .speaker-cell{padding:0;display:grid;grid-template-columns:.85fr 1.15fr}
+  img.photo-img.sp{aspect-ratio:auto;border-radius:0;height:100%;border-right:1px solid var(--border)}
+  .sp-body{padding:30px}
+  .sp-body h3{font-size:22px;margin-bottom:6px}
+  .sp-role{color:var(--accent);font-size:13px;letter-spacing:.04em;margin-bottom:18px}
+  .sp-body ul{list-style:none;display:grid;gap:11px}
+  .sp-body li{color:var(--muted);font-size:15px;padding-left:20px;position:relative;line-height:1.5}
+  .sp-body li::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--muted-2)}
+  @media(max-width:560px){.speaker-cell{grid-template-columns:1fr}img.photo-img.sp{border-right:none;border-bottom:1px solid var(--border);min-height:280px}}
+
+  .form-sec{background:var(--bg-2)}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+  .form-left h2{margin-bottom:20px}
+  .form-left p{color:var(--muted);font-size:17px;margin-bottom:28px}
+  .event-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:6px}
+  .event-card .erow{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;border-bottom:1px solid var(--border)}
+  .event-card .erow:last-child{border-bottom:none}
+  .event-card .ek{color:var(--muted-2);font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+  .event-card .ev{font-weight:600;font-size:15px;text-align:right}
+  .form-note{font-size:12px;color:var(--muted-2);text-align:center;margin-top:14px}
+  .guarantee{display:flex;gap:12px;align-items:flex-start;margin-top:18px;color:var(--muted);font-size:14px;line-height:1.55}
+  .guarantee .gi{color:var(--live);flex:0 0 auto;margin-top:2px}
+
+  /* form */
+  form.lead-form{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:30px}
+  .field{margin-bottom:16px}
+  .field label{display:block;font-size:13px;color:var(--muted);margin-bottom:7px}
+  .field label .opt{color:var(--muted-2)}
+  .field input{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:15px;font-family:inherit;padding:13px 15px;transition:.15s}
+  .field input:focus{outline:none;border-color:var(--border-2);background:#0d0e10}
+  .field input::placeholder{color:var(--muted-2)}
+  .consent{display:flex;gap:10px;align-items:flex-start;margin:4px 0 20px;font-size:12.5px;color:var(--muted-2);line-height:1.5}
+  .consent input{margin-top:3px;accent-color:var(--accent);flex:0 0 auto}
+  form.lead-form .btn-primary{width:100%}
+  .form-msg{display:none;text-align:center;padding:44px 24px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius)}
+  .form-msg.show{display:block}
+  .form-msg .big{font-size:23px;font-weight:600;margin-bottom:10px}
+  .form-msg p{color:var(--muted);font-size:15px}
+  .form-msg .gi{color:var(--live);font-size:30px;display:block;margin-bottom:10px}
+  .notion-embed{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:#fff}
+
+  footer{padding:40px 0;border-top:1px solid var(--border);color:var(--muted-2);font-size:14px}
+  .foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+  .foot-links{display:flex;gap:24px}
+  .foot-links a:hover{color:var(--text)}
+
+  @media(max-width:880px){
+    section{padding:60px 0}
+    .hero-grid{grid-template-columns:1fr;gap:36px}
+    .grid.cols-3{grid-template-columns:1fr}
+    .grid.cols-2{grid-template-columns:1fr}
+    .form-grid{grid-template-columns:1fr;gap:36px}
+    .metrics{grid-template-columns:1fr}
+    .nav-right .live{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <div class="brand">AI-ДИАГНОСТИКА <span>· Сочи</span></div>
+    <div class="nav-right">
+      <div class="live"><span class="dot"></span> осталось <span class="ph">10</span> мест</div>
+      <a href="#reg" class="btn btn-primary">Подать заявку</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="label">Пилотный воркшоп для собственников · 10 мест</div>
+        <h1>AI-диагностика бизнеса:<br><em>Точка А → Точка Б</em> за один день</h1>
+        <p class="lead">Это не курс по нейросетям. Это рабочая сессия по вашему бизнесу: за 4+ часа находим, где утекают деньги и время собственника, и собираем план внедрения AI.</p>
+        <div class="hero-bul">
+          <div class="r"><span class="mark">→</span><span>Карта вашего бизнеса и <b>3–5 точек роста</b>, где AI даёт максимум</span></div>
+          <div class="r"><span class="mark">→</span><span><b>План внедрения на 30/60 дней</b> и понятный первый шаг</span></div>
+          <div class="r"><span class="mark">→</span><span>Свой настроенный AI-ассистент и приватный workspace</span></div>
+        </div>
+        <div class="hero-cta">
+          <a href="#reg" class="btn btn-primary btn-lg">Подать заявку</a>
+          <a href="#cases" class="btn btn-ghost btn-lg">Результаты на практике</a>
+        </div>
+        <div class="meta-row">
+          <div class="meta"><div class="k">Дата</div><div class="v"><span class="ph">14 июня</span></div></div>
+          <div class="meta"><div class="k">Формат</div><div class="v">Сочи · очно</div></div>
+          <div class="meta"><div class="k">Цена</div><div class="v"><span class="ph">15 000 ₽</span></div></div>
+        </div>
+      </div>
+      <img src="denis.jpg" class="photo-img" alt="Денис Исаулов" />
+    </div>
+  </div>
+</section>
+
+<!-- ЧТО ПОЛУЧИТЕ -->
+<section id="value">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="label">Что вы получите</div>
+      <h2>Не лекция, а практика по вашему бизнесу</h2>
+      <p>Каждый участник уходит с персональным документом: где бизнес теряет часы и деньги — и что можно отдать AI уже сейчас.</p>
+      <div class="chips">
+        <div class="chip"><span class="ic">N</span>Notion</div>
+        <div class="chip"><span class="ic">C</span>Claude</div>
+        <div class="chip"><span class="ic">G</span>Gemini</div>
+      </div>
+    </div>
+    <div class="grid cols-3">
+      <div class="cell"><div class="num">01</div><h3>Диагностика в зале</h3><p>Разбираем именно ваш бизнес через AI в реальном времени — не абстрактные примеры.</p></div>
+      <div class="cell"><div class="num">02</div><h3>Карта 3–5 точек роста</h3><p>Где AI даёт максимум результата при минимуме ресурсов — с обоснованием.</p></div>
+      <div class="cell"><div class="num">03</div><h3>Роли под вашу рутину</h3><p>Какие «цифровые сотрудники» закроют значимую часть рутины в вашем бизнесе.</p></div>
+      <div class="cell"><div class="num">04</div><h3>Персональный AI-ассистент</h3><p>Свой ассистент под контекст бизнеса — для диагностики и проектирования.</p></div>
+      <div class="cell"><div class="num">05</div><h3>10 промптов собственника</h3><p>Готовые рабочие промпты, заточенные под задачи владельца.</p></div>
+      <div class="cell"><div class="num">06</div><h3>Приватный workspace</h3><p>Карта бизнеса, план и ваши результаты — в workspace, который развиваете дальше.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- КЕЙСЫ -->
+<section id="cases">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="label">Кейсы · перенос бизнеса на AI</div>
+      <h2>Что это даёт на практике</h2>
+      <p>Реальные проекты, где мы перевели процессы на AI и получили эффект в продажах, операционке и управлении.</p>
+    </div>
+    <div class="cases">
+
+      <div class="case">
+        <div class="case-head">
+          <div>
+            <h3>Asset.haus — перенос на AI-рельсы</h3>
+            <div class="ctx">Инвестиционно-управляющая компания. Перестроили продажи, операционку и процессы на AI-контур: единый ассистент собственника, квалификация заявок и регламенты на автопилоте.</div>
+          </div>
+          <span class="badge">Инвестиции · Asset Mgmt</span>
+        </div>
+        <div class="metrics">
+          <div class="metric"><div class="mv">21 → 9 дней</div><div class="mk">цикл сделки сократился на 57%</div></div>
+          <div class="metric"><div class="mv">×3</div><div class="mk">скорость обработки входящих заявок, потери лидов → 0</div></div>
+          <div class="metric"><div class="mv">+90 ч/мес</div><div class="mk">высвобождено времени партнёров на стратегию</div></div>
+        </div>
+      </div>
+
+      <div class="case">
+        <div class="case-head">
+          <div>
+            <h3>PIPO — pre-IPO токенизированная площадка</h3>
+            <div class="ctx">Перевод подготовки к pre-IPO на AI-рельсы: AI-штаб для due diligence, инвест-документов и регламентов. Сборка управленческого контура под привлечение капитала.</div>
+          </div>
+          <span class="badge">FinTech · Tokenization</span>
+        </div>
+        <div class="metrics">
+          <div class="metric"><div class="mv">−70%</div><div class="mk">срок подготовки к pre-IPO (2,5 мес → 3 недели)</div></div>
+          <div class="metric"><div class="mv">×4</div><div class="mk">скорость подготовки инвест-документов и материалов</div></div>
+          <div class="metric"><div class="mv">120+</div><div class="mk">AI-регламентов и ролей в управленческом контуре</div></div>
+        </div>
+      </div>
+
+      <div class="case">
+        <div class="case-head">
+          <div>
+            <h3>EMCD — AI в коммерции и маркетинге</h3>
+            <div class="ctx">Один из лидеров майнинга в России. Внедрили AI в коммерческий отдел и маркетинг: контент-продакшн, квалификация и follow-up лидов, скорость ответа и отчётность.</div>
+          </div>
+          <span class="badge">Mining · Топ РФ</span>
+        </div>
+        <div class="metrics">
+          <div class="metric"><div class="mv">×5</div><div class="mk">объём маркетинг-контента без роста штата</div></div>
+          <div class="metric"><div class="mv">−65%</div><div class="mk">время ответа на лид (часы → минуты)</div></div>
+          <div class="metric"><div class="mv">+34%</div><div class="mk">конверсия коммерческого отдела в сделку</div></div>
+        </div>
+      </div>
+
+    </div>
+    <p class="case-note">Цифры по проектам округлены и приведены как ориентир эффекта; на воркшопе считаем потенциал именно для вашего бизнеса.</p>
+  </div>
+</section>
+
+<!-- СКОЛЬКО ЭТО СТОИТ -->
+<section id="price">
+  <div class="wrap">
+    <div class="sec-head" style="margin-bottom:24px">
+      <div class="label">Честно про деньги</div>
+      <h2>Сколько это стоит — и когда окупается</h2>
+    </div>
+    <div class="grid cols-2">
+      <div class="pricebox">
+        <span class="tag">ВОРКШОП</span>
+        <p><b>15 000 ₽ — цена воркшопа.</b> Это вход: карта бизнеса, план на 30/60 дней и понимание, что именно у вас переводить на AI. Сейчас мы продаём только воркшоп — без обязательств идти дальше.</p>
+      </div>
+      <div class="pricebox">
+        <span class="tag" style="background:transparent;color:var(--accent);border:1px solid var(--accent)">ВНЕДРЕНИЕ</span>
+        <p><b>Интеграция в бизнес — от 100 000 до 500 000 ₽</b> (с сопровождением), если после воркшопа решите внедрять. Окупаемость считаем от вашей экономии: например, если бизнес высвобождает ~5 млн ₽/год, внедрение за 500 000 ₽ окупается в первые недели.</p>
+      </div>
+    </div>
+    <p class="case-note">На воркшопе вы увидите все ценности и сами посчитаете окупаемость — решение о внедрении принимаете уже с цифрами на руках.</p>
+  </div>
+</section>
+
+<!-- ЕСЛИ УЗНАЛИ СЕБЯ -->
+<section id="pain">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="label">Если узнали себя — вам сюда</div>
+      <h2>AI уже меняет рынок. Вопрос — вы внутри или снаружи.</h2>
+    </div>
+    <div class="grid cols-2">
+      <div class="cell">
+        <h3 style="margin-bottom:12px">Типовые симптомы</h3>
+        <div class="req" style="margin-top:0">
+          <div class="r"><span class="mark">•</span><span>Вы работаете 70 часов в неделю, и большая часть — <b>рутина, а не стратегия</b></span></div>
+          <div class="r"><span class="mark">•</span><span>Команда пробует нейросети, но <b>эффекта на P&L нет</b></span></div>
+          <div class="r"><span class="mark">•</span><span>Неясно, как встроить AI так, чтобы это был <b>актив, а не игрушка</b></span></div>
+        </div>
+      </div>
+      <div class="cell" style="background:var(--card-2)">
+        <h3 style="margin-bottom:12px">Цена промедления</h3>
+        <p style="font-size:15.5px;line-height:1.65">Окно дешёвого входа закрывается. Пока вы откладываете — конкуренты уже переводят продажи и операционку на AI и ускоряются. <b style="color:var(--text)">Через год догонять будет в разы дороже</b>, а отрыв тех, кто внедрил сейчас, станет структурным.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- МОЛНИЯ / АРХИТЕКТУРА -->
+<section id="arch">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="label">Студия «Молния»</div>
+      <h2>Автоматизацию умеют все. Стратегия и архитектура — нет.</h2>
+      <p>Мы делаем не «бота». Мы проектируем, как собственник принимает решения, где живут данные и какие роли усиливают бизнес — чтобы найти неработающие процессы и слабые места в управлении.</p>
+    </div>
+    <div class="grid cols-3">
+      <div class="cell"><div class="num">Рынок</div><h3 style="margin-bottom:8px">Боты и «GPT в процессы»</h3><p>Автоматизируют отдельные задачи. Полезно — но это делают все, и подход быстро упирается в потолок без общей системы.</p></div>
+      <div class="cell"><div class="num">Мы</div><h3 style="margin-bottom:8px">AI-архитектура</h3><p>Проектируем управление целиком: решения, данные, роли и контроль качества. Какие процессы не работают и какие продукты дают оборот, но не прибыль.</p></div>
+      <div class="cell"><div class="num">Результат</div><h3 style="margin-bottom:8px">Управляемость</h3><p>Собственник перестаёт быть оператором рутины. Решения быстрее, контроль прозрачнее, команда работает по понятным правилам.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- МАТЕМАТИКА -->
+<section id="math">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="label">Математика возврата</div>
+      <h2>Сколько стоят часы владельца, которые возвращает AI</h2>
+      <p>Цель — вернуть собственнику <b>20–25 часов в неделю</b> и повысить отдачу времени команды. Ниже — ориентир, точную «ставку часа» считаем на разборе под ваш бизнес.</p>
+    </div>
+    <div class="grid cols-3">
+      <div class="cell"><div class="num">15 ч/нед</div><h3>Консервативно</h3><p>Возвращаете стратегию и контроль. Ориентир: <b>от 5 млн ₽/год</b> в пересчёте на часы владельца.</p></div>
+      <div class="cell"><div class="num">20 ч/нед</div><h3>Норма</h3><p>Выход из операционки + рост скорости решений. Ориентир: <b>≈ 6,7 млн ₽/год</b>.</p></div>
+      <div class="cell"><div class="num">25 ч/нед</div><h3>Сильный рычаг</h3><p>Ускорение компании, заметное в P&L. Ориентир: <b>≈ 8,4 млн ₽/год</b>.</p></div>
+    </div>
+    <p class="case-note" style="margin-top:14px">Плюс эффект на команде: AI ускоряет результат в 2–4 раза. И состояние собственника: меньше перегруза, больше ясности.</p>
+  </div>
+</section>
+
+<!-- ПРОГРАММА -->
+<section id="program">
+  <div class="wrap">
+    <div class="sec-head"><div class="label">Структура · 4+ часа</div><h2>Как пройдёт воркшоп</h2></div>
+    <div class="agenda">
+      <div class="arow"><div class="anum">01</div><div><h3>Ввод и правила игры</h3><p>Как мы работаем 4+ часа: быстро, на вашем бизнесе, с конкретными артефактами на выходе.</p></div></div>
+      <div class="arow"><div class="anum">02</div><div><h3>Точка А: диагностика</h3><p>Собираете базовую карту бизнеса и фиксируете узкие места. Денис ведёт голосом, на экране — пример.</p></div></div>
+      <div class="arow"><div class="anum">03</div><div><h3>Точка Б: цель и проверка</h3><p>Формулируем цель на 90 дней, метрику успеха и ограничения — что реально мешает её достичь.</p></div></div>
+      <div class="arow"><div class="anum">04</div><div><h3>Сонастройка + нетворкинг</h3><p>Выдаём готовые доступы (Notion и AI — за наш счёт), проверяем VPN, даём мини-глоссарий. Затем кофе-брейк и знакомство.</p></div></div>
+      <div class="arow"><div class="anum">05</div><div><h3>AI-роли: проектируем рычаги</h3><p>Выбираем 1–3 роли под ваш кейс (продажи, маркетинг, аналитика, операционка, финансы) и описываем задачи + KPI.</p></div></div>
+      <div class="arow"><div class="anum">06</div><div><h3>План 30/60 дней</h3><p>Фиксируем первый шаг и что должно заработать в ближайшие 2 недели. Уходите с планом и приоритетами.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- КОМУ / ЧЕГО НЕ БУДЕТ -->
+<section id="req">
+  <div class="wrap">
+    <div class="grid cols-2">
+      <div class="cell" style="padding:34px">
+        <div class="label" style="margin-bottom:14px">Кому подойдёт · что нужно</div>
+        <h2 style="font-size:24px;margin-bottom:16px">Собственникам и партнёрам</h2>
+        <p style="color:var(--muted);font-size:15.5px;margin-bottom:14px">Камерный формат до 10 человек. Работаем на ваших данных. Ведут 2 ведущих + 2 AI-ассистента — чтобы никто не «выпал». Нулевой уровень в AI — это нормально, ведём за руку.</p>
+        <div class="req">
+          <div class="r"><span class="mark">•</span><span><b>Ноутбук</b> + зарядка</span></div>
+          <div class="r"><span class="mark">•</span><span><b>Наушники с микрофоном</b> — работаем голосом</span></div>
+          <div class="r"><span class="mark">•</span><span><b>VPN</b> (если нужен) — поможем настроить на месте</span></div>
+        </div>
+        <p style="color:var(--muted);font-size:14px;margin-top:14px">Notion-workspace, облако и AI-подписку настраиваем и оплачиваем мы — всё включено в стоимость. От вас — только VPN.</p>
+      </div>
+      <div class="cell" style="padding:34px">
+        <div class="label" style="margin-bottom:14px">Чего НЕ будет</div>
+        <h2 style="font-size:24px;margin-bottom:20px">Это не курс по ChatGPT</h2>
+        <div class="nolist">
+          <div class="noitem"><span class="x">✕</span><span>Не теория для галочки и не «курс по промптам»</span></div>
+          <div class="noitem"><span class="x">✕</span><span>Не «прикручиваем ботов в Telegram»</span></div>
+          <div class="noitem"><span class="x">✕</span><span>Не «80-страничные стратегии» — только карта и план, по которому действуют</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- СПИКЕРЫ -->
+<section id="speaker">
+  <div class="wrap">
+    <div class="sec-head"><div class="label">Ведущие</div><h2>Кто проводит воркшоп</h2></div>
+    <div class="grid cols-2">
+      <div class="cell speaker-cell">
+        <img src="denis.jpg" class="photo-img sp" alt="Денис Исаулов" />
+        <div class="sp-body">
+          <h3>Денис Исаулов</h3>
+          <div class="sp-role">Ведущий воркшопа</div>
+          <ul>
+            <li>15+ лет со стартапами и продуктами, 130+ внебиржевых сделок (инвестиции, M&A, структурирование)</li>
+            <li>10 000+ отсмотренных проектов — быстро видит слабые места модели</li>
+            <li>10 лет в крипто/финтех-контуре, международный опыт переговоров</li>
+            <li>3 года строит личные и бизнес-процессы на AI-штабе</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cell speaker-cell">
+        <img src="sasha.jpg" class="photo-img sp" alt="Александр Старцев" />
+        <div class="sp-body">
+          <h3>Александр Старцев</h3>
+          <div class="sp-role">Автоматизация процессов · технический специалист</div>
+          <ul>
+            <li>1000+ автоматизированных воронок и процессов</li>
+            <li>Эксперт в retention-маркетинге и инструментах продаж (B2B/B2C)</li>
+            <li>n8n / Zapier / Make / Notion: интеграции и «штабы» под задачи</li>
+            <li>Доводит настройки участников до рабочего состояния прямо в зале</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="sec-head"><div class="label">FAQ</div><h2>Частые вопросы</h2></div>
+    <div class="grid cols-2">
+      <div class="cell"><h3 style="margin-bottom:10px">Я новичок и боюсь застрять на технике</h3><p style="color:var(--muted);font-size:15px">Формат рассчитан на нулевой уровень. В начале выдаём готовые доступы к Notion и AI (всё за наш счёт) и помогаем с VPN, а в зале помогают ведущие и ассистенты — вы точно дойдёте до карты бизнеса и плана.</p></div>
+      <div class="cell"><h3 style="margin-bottom:10px">Я уже пробовал AI, но «не взлетело»</h3><p style="color:var(--muted);font-size:15px">Обычная история. Мы собираем не набор промптов, а управленческий контур: роли, правила, данные и контроль. Часто именно этого не хватает для эффекта.</p></div>
+      <div class="cell"><h3 style="margin-bottom:10px">Можно отправить сотрудника вместо себя?</h3><p style="color:var(--muted);font-size:15px">Лучший эффект — когда присутствует тот, кто принимает решения. Если едет сотрудник, попросим заранее подготовить контекст и границы полномочий.</p></div>
+      <div class="cell"><h3 style="margin-bottom:10px">Что я унесу с собой?</h3><p style="color:var(--muted);font-size:15px">Карту бизнеса (Точка А → Точка Б), 1–3 роли под ваш кейс, план на 30/60 дней и приватный workspace как базу для развития.</p></div>
+      <div class="cell"><h3 style="margin-bottom:10px">Как оплата и есть ли возврат?</h3><p style="color:var(--muted);font-size:15px">Оплата — после подтверждения заявки. Если на интервью поймём, что формат вам не подходит — скажем прямо и вернём оплату. Без рисков для вас.</p></div>
+      <div class="cell"><h3 style="margin-bottom:10px">Можно без публичного разбора и цифр?</h3><p style="color:var(--muted);font-size:15px">Да. Можно разбирать кейс в «закрытом» режиме или без конкретных цифр — в заявке есть вопрос про публичность, подстроимся под ваш комфорт.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- РЕГИСТРАЦИЯ -->
+<section id="reg" class="form-sec">
+  <div class="wrap">
+    <div class="form-grid">
+      <div class="form-left">
+        <div class="label">Регистрация · мест ограничено</div>
+        <h2>Подать заявку</h2>
+        <p>Заполните короткую форму (1–2 минуты). Мы свяжемся, подтвердим, что формат вам подходит, и пришлём детали для оплаты и подготовки.</p>
+        <div class="event-card">
+          <div class="erow"><span class="ek">Дата</span><span class="ev"><span class="ph">14 июня</span></span></div>
+          <div class="erow"><span class="ek">Длительность</span><span class="ev"><span class="ph">4+ часа</span></span></div>
+          <div class="erow"><span class="ek">Место</span><span class="ev"><span class="ph">Сочи, центр</span></span></div>
+          <div class="erow"><span class="ek">Группа</span><span class="ev">до 10 человек</span></div>
+          <div class="erow"><span class="ek">Цена</span><span class="ev"><span class="ph">15 000 ₽</span></span></div>
+        </div>
+        <div class="guarantee"><span class="gi">✓</span><span>Сначала интервью, потом оплата. Если формат вам не подходит — вернём деньги.</span></div>
+      </div>
+      <div>
+        <div class="notion-embed">
+          <iframe src="https://asset-haus.notion.site/ebd/2a90740c854a4265afe1a4868b7b0dbf?v=7b19413ea59a45b88a1d937f7a1b954d"
+                  width="100%" height="760" frameborder="0" loading="lazy" allowfullscreen
+                  style="display:block;width:100%;border:0;background:#fff"></iframe>
+        </div>
+        <div class="form-note" style="margin-top:14px">Форма откроется прямо здесь. Заявка → интервью → оплата → подготовка</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap foot-inner">
+    <div>AI-штаб владельца · Воркшоп в Сочи</div>
+    <div class="foot-links">
+      <a href="#cases">Кейсы</a>
+      <a href="#program">Программа</a>
+      <a href="#reg">Записаться</a>
+    </div>
+  </div>
+</footer>
+
+
+</body>
+</html>
