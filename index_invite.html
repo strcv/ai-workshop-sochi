@@ -7,13 +7,13 @@
 <meta name="description" content="Пилотный воркшоп в Сочи для собственников: за 4+ часа соберём карту бизнеса и план внедрения ИИ. 10 мест, 15 000 ₽." />
 
 <!-- ============================================================
-     КУДА ПАДАЮТ ЗАЯВКИ → Google-таблица (Apps Script).
-     Инструкция — в файле google-apps-script.gs рядом.
-     Вставьте URL веб-приложения в GSHEET_ENDPOINT.
+     КУДА ПАДАЮТ ЗАЯВКИ → Apps Script, который пишет в базу Notion.
+     Инструкция и код — в файле google-apps-script.gs рядом.
+     Вставьте URL веб-приложения Apps Script в FORM_ENDPOINT ниже.
      Пусто = демо-режим (показывает «спасибо», ничего не шлёт).
      ============================================================ -->
 <script>
-  window.GSHEET_ENDPOINT = ""; // напр. https://script.google.com/macros/s/AKfyc.../exec
+  window.FORM_ENDPOINT = ""; // URL веб-приложения Apps Script, напр. https://script.google.com/macros/s/AKfyc.../exec
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -542,7 +542,7 @@
 <script>
   const form = document.getElementById('leadForm');
   const msg  = document.getElementById('formMsg');
-  const endpoint = (window.GSHEET_ENDPOINT || '').trim();
+  const endpoint = (window.FORM_ENDPOINT || '').trim();
 
   form.addEventListener('submit', async function(e){
     e.preventDefault();
@@ -567,7 +567,7 @@
           body: JSON.stringify(data)
         });
       } else {
-        console.log('Заявка (демо, GSHEET_ENDPOINT не задан):', data);
+        console.log('Заявка (демо, FORM_ENDPOINT не задан):', data);
         await new Promise(r=>setTimeout(r,500));
       }
       form.style.display = 'none';
