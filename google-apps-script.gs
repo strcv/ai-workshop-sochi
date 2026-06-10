@@ -19,12 +19,14 @@
  * ───────────────────────────────────────────────────────────────────
  */
 
+var SHEET_ID     = ""; // ID таблицы из URL: docs.google.com/spreadsheets/d/ВОТ_ЭТО/edit
 var NOTIFY_EMAIL = ""; // напр. "you@gmail.com" — пусто = без писем
 
 function doPost(e) {
   try {
     var d = JSON.parse(e.postData.contents);
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
+    var ss = SHEET_ID ? SpreadsheetApp.openById(SHEET_ID) : SpreadsheetApp.getActiveSpreadsheet();
+    var sheet = ss.getSheets()[0];
 
     if (sheet.getLastRow() === 0) {
       sheet.appendRow(['Дата', 'Имя', 'Телефон', 'Telegram', 'Ниша / выручка', 'Источник']);
