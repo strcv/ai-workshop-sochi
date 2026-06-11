@@ -29,7 +29,10 @@ function doPost(e) {
     var sheet = ss.getSheets()[0];
 
     if (sheet.getLastRow() === 0) {
-      sheet.appendRow(['Дата', 'Имя', 'Телефон', 'Telegram', 'Ниша / выручка', 'Источник']);
+      sheet.appendRow(['Дата', 'Имя', 'Телефон', 'Telegram', 'Сайт', 'Кто придёт',
+        'Оборот', 'Текущий стек', 'Опыт с AI', 'AI-инструменты', 'Фокус разбора',
+        'Главная боль', 'Готовность к данным', 'Публичный разбор',
+        'Ноутбук', 'Наушники', 'VPN', 'Источник']);
     }
 
     sheet.appendRow([
@@ -37,7 +40,19 @@ function doPost(e) {
       d.name || '',
       d.phone || '',
       d.telegram || '',
-      d.comment || '',
+      d.site || '',
+      d.role || '',
+      d.revenue || '',
+      d.stack || '',
+      d.ai_exp || '',
+      d.ai_tools || '',
+      d.focus || '',
+      d.pain || '',
+      d.data_ready || '',
+      d.public || '',
+      d.laptop || '',
+      d.headphones || '',
+      d.vpn || '',
       d.source || ''
     ]);
 

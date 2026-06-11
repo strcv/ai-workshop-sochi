@@ -162,6 +162,23 @@
   .form-msg p{color:var(--muted);font-size:15px}
   .form-msg .gi{color:var(--live);font-size:30px;display:block;margin-bottom:10px}
 
+  /* расширенная анкета */
+  .field textarea{width:100%;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:15px;font-family:inherit;padding:13px 15px;min-height:80px;resize:vertical;transition:.15s}
+  .field textarea:focus{outline:none;border-color:var(--border-2);background:#0d0e10}
+  .field textarea::placeholder{color:var(--muted-2)}
+  .field-2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .fgroup{margin-bottom:18px}
+  .fgroup > .q{display:block;font-size:13px;color:var(--muted);margin-bottom:9px}
+  .fgroup .q .opt{color:var(--muted-2)}
+  .opts{display:grid;gap:8px}
+  .opts.row{grid-auto-flow:column;grid-template-columns:none;justify-content:start;gap:18px;flex-wrap:wrap}
+  .opt-row{display:flex;align-items:center;gap:10px;color:var(--text);font-size:14.5px;cursor:pointer;background:var(--bg);border:1px solid var(--border);border-radius:9px;padding:11px 13px;transition:.12s}
+  .opt-row:hover{border-color:var(--border-2)}
+  .opt-row input{accent-color:var(--accent);width:16px;height:16px;flex:0 0 auto;cursor:pointer;margin:0}
+  .fdivider{height:1px;background:var(--border);margin:24px 0}
+  .form-left.sticky{position:sticky;top:84px}
+  @media(max-width:880px){.form-left.sticky{position:static}.field-2{grid-template-columns:1fr}}
+
   footer{padding:40px 0;border-top:1px solid var(--border);color:var(--muted-2);font-size:14px}
   .foot-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
   .foot-links{display:flex;gap:24px}
@@ -478,10 +495,10 @@
 <section id="reg" class="form-sec">
   <div class="wrap">
     <div class="form-grid">
-      <div class="form-left">
+      <div class="form-left sticky">
         <div class="label">Регистрация · мест ограничено</div>
         <h2>Подать заявку</h2>
-        <p>Заполните короткую форму (1–2 минуты). Мы свяжемся, подтвердим, что формат вам подходит, и пришлём детали для оплаты и подготовки.</p>
+        <p>Заполните анкету (2–3 минуты). Чем подробнее ответите — тем точнее разберём ваш бизнес в зале. После заявки свяжемся, подтвердим формат и пришлём детали.</p>
         <div class="event-card">
           <div class="erow"><span class="ek">Дата</span><span class="ev"><span class="ph">14 июня</span></span></div>
           <div class="erow"><span class="ek">Длительность</span><span class="ev"><span class="ph">4+ часа</span></span></div>
@@ -493,22 +510,129 @@
       </div>
       <div>
         <form class="lead-form" id="leadForm">
-          <div class="field">
-            <label for="name">Как к вам обращаться</label>
-            <input type="text" id="name" name="name" placeholder="Имя" required />
+
+          <div class="field-2">
+            <div class="field">
+              <label for="name">Имя <span class="opt">*</span></label>
+              <input type="text" id="name" name="name" placeholder="Как к вам обращаться" required />
+            </div>
+            <div class="field">
+              <label for="phone">Телефон <span class="opt">*</span></label>
+              <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required />
+            </div>
           </div>
-          <div class="field">
-            <label for="phone">Телефон</label>
-            <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required />
+          <div class="field-2">
+            <div class="field">
+              <label for="telegram">Telegram <span class="opt">— по желанию</span></label>
+              <input type="text" id="telegram" name="telegram" placeholder="@username" />
+            </div>
+            <div class="field">
+              <label for="site">Сайт <span class="opt">— по желанию</span></label>
+              <input type="text" id="site" name="site" placeholder="example.ru" />
+            </div>
           </div>
-          <div class="field">
-            <label for="telegram">Telegram <span class="opt">— по желанию</span></label>
-            <input type="text" id="telegram" name="telegram" placeholder="@username" />
+
+          <div class="fdivider"></div>
+
+          <div class="fgroup">
+            <span class="q">Кто придёт</span>
+            <div class="opts">
+              <label class="opt-row"><input type="radio" name="role" value="Собственник / партнёр" /><span>Собственник / партнёр</span></label>
+              <label class="opt-row"><input type="radio" name="role" value="CEO / GM" /><span>CEO / GM</span></label>
+              <label class="opt-row"><input type="radio" name="role" value="Руководитель департамента" /><span>Руководитель департамента</span></label>
+            </div>
           </div>
-          <div class="field">
-            <label for="comment">Ниша / выручка бизнеса <span class="opt">— по желанию</span></label>
-            <input type="text" id="comment" name="comment" placeholder="Напр.: производство, 80 млн ₽/год" />
+
+          <div class="fgroup">
+            <span class="q">Оборот бизнеса</span>
+            <div class="opts">
+              <label class="opt-row"><input type="radio" name="revenue" value="до 50 млн ₽" /><span>до 50 млн ₽</span></label>
+              <label class="opt-row"><input type="radio" name="revenue" value="50–100 млн ₽" /><span>50–100 млн ₽</span></label>
+              <label class="opt-row"><input type="radio" name="revenue" value="100–300 млн ₽" /><span>100–300 млн ₽</span></label>
+              <label class="opt-row"><input type="radio" name="revenue" value="300 млн ₽+" /><span>300 млн ₽+</span></label>
+            </div>
           </div>
+
+          <div class="field">
+            <label for="stack">Текущий стек (CRM / BI / таски) <span class="opt">— по желанию</span></label>
+            <input type="text" id="stack" name="stack" placeholder="Напр.: amoCRM, 1С, Notion" />
+          </div>
+
+          <div class="fgroup">
+            <span class="q">Опыт с AI</span>
+            <div class="opts">
+              <label class="opt-row"><input type="radio" name="ai_exp" value="Нет опыта" /><span>Нет опыта</span></label>
+              <label class="opt-row"><input type="radio" name="ai_exp" value="Пробовал" /><span>Пробовал</span></label>
+              <label class="opt-row"><input type="radio" name="ai_exp" value="Использую регулярно" /><span>Использую регулярно</span></label>
+            </div>
+          </div>
+
+          <div class="fgroup">
+            <span class="q">AI-инструменты <span class="opt">— можно несколько</span></span>
+            <div class="opts">
+              <label class="opt-row"><input type="checkbox" name="ai_tools" value="ChatGPT" /><span>ChatGPT</span></label>
+              <label class="opt-row"><input type="checkbox" name="ai_tools" value="Claude" /><span>Claude</span></label>
+              <label class="opt-row"><input type="checkbox" name="ai_tools" value="Gemini" /><span>Gemini</span></label>
+              <label class="opt-row"><input type="checkbox" name="ai_tools" value="Perplexity" /><span>Perplexity</span></label>
+              <label class="opt-row"><input type="checkbox" name="ai_tools" value="Midjourney" /><span>Midjourney</span></label>
+              <label class="opt-row"><input type="checkbox" name="ai_tools" value="Другое" /><span>Другое</span></label>
+            </div>
+          </div>
+
+          <div class="fgroup">
+            <span class="q">Фокус разбора <span class="opt">— можно несколько</span></span>
+            <div class="opts">
+              <label class="opt-row"><input type="checkbox" name="focus" value="Операционка" /><span>Операционка</span></label>
+              <label class="opt-row"><input type="checkbox" name="focus" value="Продажи" /><span>Продажи</span></label>
+              <label class="opt-row"><input type="checkbox" name="focus" value="Маркетинг" /><span>Маркетинг</span></label>
+              <label class="opt-row"><input type="checkbox" name="focus" value="Финансы" /><span>Финансы</span></label>
+              <label class="opt-row"><input type="checkbox" name="focus" value="HR / рекрутинг" /><span>HR / рекрутинг</span></label>
+              <label class="opt-row"><input type="checkbox" name="focus" value="Аналитика" /><span>Аналитика</span></label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="pain">Главная боль / запрос <span class="opt">— по желанию</span></label>
+            <textarea id="pain" name="pain" placeholder="Что болит сильнее всего? Что хотите решить?"></textarea>
+          </div>
+
+          <div class="fgroup">
+            <span class="q">Готовность к данным</span>
+            <div class="opts">
+              <label class="opt-row"><input type="radio" name="data_ready" value="Да, с цифрами" /><span>Да, с цифрами</span></label>
+              <label class="opt-row"><input type="radio" name="data_ready" value="Да, без цифр" /><span>Да, без цифр</span></label>
+              <label class="opt-row"><input type="radio" name="data_ready" value="Нет / пока не готов(а)" /><span>Нет / пока не готов(а)</span></label>
+            </div>
+          </div>
+
+          <div class="fgroup">
+            <span class="q">Публичный разбор на сцене</span>
+            <div class="opts">
+              <label class="opt-row"><input type="radio" name="public" value="Да" /><span>Да</span></label>
+              <label class="opt-row"><input type="radio" name="public" value="Да (без цифр)" /><span>Да (без цифр)</span></label>
+              <label class="opt-row"><input type="radio" name="public" value="Нет" /><span>Нет</span></label>
+            </div>
+          </div>
+
+          <div class="fgroup">
+            <span class="q">Что будет с собой</span>
+            <div class="opts">
+              <label class="opt-row"><input type="checkbox" name="laptop" /><span>Ноутбук + зарядка</span></label>
+              <label class="opt-row"><input type="checkbox" name="headphones" /><span>Наушники с микрофоном</span></label>
+            </div>
+          </div>
+
+          <div class="fgroup">
+            <span class="q">VPN</span>
+            <div class="opts">
+              <label class="opt-row"><input type="radio" name="vpn" value="Есть (работает)" /><span>Есть (работает)</span></label>
+              <label class="opt-row"><input type="radio" name="vpn" value="Есть (не уверен)" /><span>Есть (не уверен)</span></label>
+              <label class="opt-row"><input type="radio" name="vpn" value="Нет" /><span>Нет</span></label>
+            </div>
+          </div>
+
+          <div class="fdivider"></div>
+
           <label class="consent">
             <input type="checkbox" required />
             <span>Даю согласие на обработку персональных данных и связь по оставленным контактам.</span>
@@ -544,13 +668,30 @@
   const msg  = document.getElementById('formMsg');
   const endpoint = (window.FORM_ENDPOINT || '').trim();
 
+  const txt    = n => { const el = form.elements[n]; return el ? String(el.value || '').trim() : ''; };
+  const radio  = n => { const el = form.querySelector('input[name="'+n+'"]:checked'); return el ? el.value : ''; };
+  const checks = n => Array.from(form.querySelectorAll('input[name="'+n+'"]:checked')).map(e=>e.value).join(', ');
+  const single = n => { const el = form.querySelector('input[name="'+n+'"]'); return el && el.checked ? 'Да' : ''; };
+
   form.addEventListener('submit', async function(e){
     e.preventDefault();
     const data = {
-      name: form.name.value.trim(),
-      phone: form.phone.value.trim(),
-      telegram: form.telegram.value.trim(),
-      comment: form.comment.value.trim(),
+      name: txt('name'),
+      phone: txt('phone'),
+      telegram: txt('telegram'),
+      site: txt('site'),
+      role: radio('role'),
+      revenue: radio('revenue'),
+      stack: txt('stack'),
+      ai_exp: radio('ai_exp'),
+      ai_tools: checks('ai_tools'),
+      focus: checks('focus'),
+      pain: txt('pain'),
+      data_ready: radio('data_ready'),
+      public: radio('public'),
+      laptop: single('laptop'),
+      headphones: single('headphones'),
+      vpn: radio('vpn'),
       source: 'landing-ai-sochi',
       page: location.href
     };
